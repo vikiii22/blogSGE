@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <!-- definición expresión title -->
+        <!-- podríamos poner contenido al bloque pero en este
+             caso lo que vamos a hacer con este bloque es que
+             cuando se herede la plantilla pongo como título
+             el título de página y - Python - Django -->
+        <title>{% block title %}{% endblock %} - Python - Django</title>
+    </head>
+
+    <body>
+        <!-- barra de navegación de Bootstrap 4 -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Blog con Python y Django</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="container mt-3"> <!-- contenedor BT4 con margin top de 3 -->
+            {% block content %}{% endblock %}
+        </div>
+
+    </body>
+</html>
