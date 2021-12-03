@@ -8,6 +8,8 @@
              cuando se herede la plantilla pongo como título
              el título de página y - Python - Django -->
         <title>{% block title %}{% endblock %} - Python - Django</title>
+        {%load static%}
+        <link href ="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"/>
     </head>
 
     <body>
@@ -24,6 +26,8 @@
         <div class="container mt-3"> <!-- contenedor BT4 con margin top de 3 -->
             {% block content %}{% endblock %}
         </div>
-
+<script src="{% static 'js/jquery.slim.min.js'%}"></script>
+<script src="{% static 'js/popper.min.js'%}"></script>
+<script src="{% static 'js/bootstrap.min.js'%}"></script>
     </body>
 </html>
