@@ -23,7 +23,22 @@
             </div>
         </nav>
 
-        <div class="container mt-3"> <!-- contenedor BT4 con margin top de 3 -->
+         <div class="container mt-3"> <!-- contenedor BT4 con margin top de 3 -->
+            <!-- mensajes de error -->
+            {% if messages %}
+                <div class="row mt-3 mb-3">
+                    <div class="col-12"><!-- toda la pantalla -->
+                        <!-- recorremos todos los mensajes -->
+                        {% for message in messages %}
+                            <!-- correspondencia con la clase de Bootstrap -->
+                            <div class="alert alert-{{ message.tags }}">
+                                <!-- mostramos el mensaje -->
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
             {% block content %}{% endblock %}
         </div>
 <script src="{% static 'js/jquery.slim.min.js'%}"></script>
