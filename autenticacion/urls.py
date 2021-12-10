@@ -18,5 +18,5 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('registro/', registro, name="registro"),
+    path('registro/', ViewRegistre.as_view(), name="registro"),
 ]

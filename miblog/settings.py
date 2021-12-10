@@ -11,8 +11,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import os #Utilizado para acceder a los directorios
-
+# importamos las constantes de los mensajes con alias message_constants
+from django.contrib.messages import constants as message_constants
+#Utilizado para acceder a los directorios
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from miblog.db import MYSQL as MYSQL
 
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     #Mis aplicaciones
     'blog',
     'autenticacion',
@@ -127,3 +130,14 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# diccionario para formatear - mapear los mensajes a las clases de Bootstrap
+MESSAGE_TAGS = {
+    message_constants.DEBUG: 'debug',
+    message_constants.INFO: 'info',
+    message_constants.SUCCESS: 'success',
+    message_constants.WARNING: 'warning',
+    message_constants.ERROR: 'danger' #danger - clase específica Bootstrap para error
+}

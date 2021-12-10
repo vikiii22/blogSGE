@@ -16,8 +16,8 @@ Including another URLconf
 
 from django.urls import path
 
-from .views import hola
+from .views import *
 
 urlpatterns = [
-    path('hola-django/', hola, name="hola"), #declaracion url que nos lleva a la vista hola
+    path('', index, name="blog"), #declaracion url que nos lleva a la vista hola
 ]

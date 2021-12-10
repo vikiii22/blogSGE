@@ -3,5 +3,7 @@ from django.shortcuts import render
 
 # Create your views here.
 
-def hola(request):
-    return HttpResponse("Hola Django")
+def index(request):
+    #return HttpResponse("¡Hola, bienvenid@ al Blog!")
+    return render(request, "blog.html")
+
