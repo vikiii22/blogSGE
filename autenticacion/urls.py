@@ -15,8 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+# from .views import ViewRegistre, cerrar_sesion, acceder
 from .views import *
 
+
 urlpatterns = [
+
     path('registro/', ViewRegistre.as_view(), name="registro"),
+    path('cerrar_sesion/', cerrar_sesion, name="cerrar_sesion"),
+    path('acceder/', acceder, name="acceder"),
 ]

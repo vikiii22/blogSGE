@@ -1,7 +1,6 @@
-
 {% extends 'base.html' %}
 
-{% block title %}Registro{% endblock %}
+{% block title %}Acceder{% endblock %}
 {% load crispy_forms_tags %}
 
 {% block content %}
@@ -10,6 +9,6 @@
         {% csrf_token %} <!--validacion autenticacion-->
         {{ form|crispy}} <!--hace refencia a la etiqueta del diccionario de views.py "form": form-->
         <!-- botón de envío de formulario de Bootstrap -->
-        <button type="submit" class="btn btn-success">¡Crear cuenta!</button>
+        <button type="submit" class="btn btn-success">¡Iniciar sesion!</button>
     </form>
 {% endblock %}
