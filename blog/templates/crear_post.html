@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+<!-- sobreescribimos el bloque title de la plantilla base-->
+{% block title %}Crear Post{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <!-- formulario de envío de datos con autocompletar desactivado y margin-top de 3-->
+    <!-- se ha de añadir enctype porque vamos a trabajar con imágenes -->
+    <form method="POST" action="" class="mt-3" autocomplete="off" enctype="multipart/form-data">
+        {% csrf_token %} <!--validacion autenticacion-->
+        {{ form|crispy }} <!--hace refencia a la etiqueta del diccionario de views.py "form": form-->
+        <!-- botón de envío de formulario de Bootstrap -->
+        <button type="submit" class="btn btn-success">Guardar!</button>
+    </form>
+{% endblock %}
