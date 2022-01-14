@@ -5,5 +5,57 @@
 {% block title %}Blog{% endblock %}
 
 {% block content %}
+<div class="container mt-3"><!-- capa con margin top de 3 -->
+    <!-- Botón para ir a crear un nuevo post -->
+    <div class="row mb-3"><!-- fila con margin bottom de 3 -->
+        <!-- Bootstrap divide la pantalla en 12 columnas -->
+        <!-- con class=col-3 offset-9 se está diciendo que la capa ocupa 3 columnas
+                y 9 columnas se quedaran vacías-->
+        <div class="col-3 offset-9">
+            <!-- enlace de tipo botón Bootstrap flotado a la derecha en la capa -->
+            <a href="{% url 'crear_post' %}" class="btn btn-primary float-right">
+                Crear nuevo post
+            </a>
+        </div>
+    </div>
+    <!-- POSTS -->
+    {% if posts %}<!-- Si tenemos posts -->
+    <!-- Recorremos los posts para mostrarlos -->
+    {% for post in posts %}
+    {% if forloop.first %}
+    <div class="row">{% endif %}
+        <div class="col-4"><!-- 3 por fila - col-3 ...4 por fila - col-6 ... 2 por fila-->
+            <div class="card"><!-- formato tarjeta BootStrap -->
+                <img class="card-img-top" src="{{ post.imagen.url }}" alt="{{ post.titulo }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.titulo }}</h5>
+                    <hr/>
+                    <h6 class="card-subtitle">Autor: {{ post.autor.username }}</h6>
+                    <p class="card-text">Categoría: {{ post.categoria.nombre }}</p>
+                </div>
+                <div class="card-footer">
+                    <!--solamente se podrán eliminar aquellos post del que el usuario sea el autor-->
+                    {% if user == post.autor %}<!--usuario logado == autor post -->
+                    <a href="{% url 'eliminar_post' post.id %}" class="btn btn-danger">
+                        <!-- función eliminar_post (id) declarada en la vista -->
+                        Eliminar post
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- divisibleby: 4 - 4 por fila , divisibleby: 2 - 6 por fila-->
+        {% if forloop.counter|divisibleby:3 %}
+    </div>
+    <div class="row">{% endif %}
+        {% if forloop.last %}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% else %}<!-- Si no tenemos posts -->
+    <!-- Texto en rojo -->
+    <div class="alert alert-danger">No hay nada aquí</div>
+    {% endif %}
+</div>
 
 {% endblock %}
