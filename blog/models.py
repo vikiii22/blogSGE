@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+import os
 
 # Create your models here.
 
@@ -49,6 +50,15 @@ class Post(models.Model):
 
     def __str__(self):
         return self.titulo
+
+        # sobreescribiendo un método - instancia (self) y argumentos (*args, **kwargs) de un método
+
+    def delete(self, *args, **kwargs):
+        if os.path.isfile(self.imagen.path):  # si el archivo existe
+            os.remove(self.imagen.path)  # se elimina del sistemas de archivo
+        super(Post, self).delete(*args, **kwargs)  # borrado del post llamando al constructor
+
+    # podríamos sobreescribir todos los métodos disponibles - save, update...
 
     class Meta:
         db_table = 'posts'

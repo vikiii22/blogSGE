@@ -3,14 +3,16 @@ from django.shortcuts import render, redirect
 from .forms import FormularioPost #importamos el formulario Post
 from django.contrib import messages #Para tratar los mensajes de error
 from .models import Post
+from django.contrib.auth.decorators import login_required #Decorador para requerir la autenticacion
 # Create your views here.
 
+#@login_required(login_url='/accounts/acceder')
 def index(request):
     #return HttpResponse("¡Hola, bienvenid@ al Blog!")
     posts = Post.objects.all()
     return render(request, "blog.html", {"posts": posts})
 
-
+@login_required(login_url='/accounts/acceder')
 def crear_post(request):
     if request.method == "POST": #comprobamos la petición
         # este formulario también recibe archivos
@@ -30,6 +32,7 @@ def crear_post(request):
     form = FormularioPost()#aquí tendríamos el formulario
     return render(request, "crear_post.html", {"form": form})#y se lo pasamos a la vista crear_post.html
 
+@login_required(login_url='/accounts/acceder')
 def eliminar_post(request, post_id):
     try:
         post = Post.objects.get(pk=post_id) # recogemos el id del post de la url
@@ -48,3 +51,4 @@ def eliminar_post(request, post_id):
     post.delete()
     messages.success(request, F"El post {post.titulo} ha sido eliminado!")
     return redirect("blog")
+
