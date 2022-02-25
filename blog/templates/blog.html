@@ -36,6 +36,10 @@
                     <p class="card-text">Categoría: {{ post.categoria.nombre }}</p>
                 </div>
                 <div class="card-footer">
+                    <a href="{% url 'comprar_post' post.id %}" class="btn btn-primary">
+                        <!-- función comprar_post (id) declarada en la vista -->
+                        Comprar
+                    </a>
                     <!--solamente se podrán eliminar aquellos post del que el usuario sea el autor-->
                     {% if user == post.autor %}<!--usuario logado == autor post -->
                     <a href="{% url 'eliminar_post' post.id %}" class="btn btn-danger">

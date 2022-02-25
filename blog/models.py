@@ -45,7 +45,7 @@ class Product(models.Model):
     # fecha de alta del post para llevar el registro
     # auto_now_add se define automáticamente con la fecha de inserción
     # verbose_name no se verá porque no es un campo que mostraremos en el formulario... se puede quitar
-    precio = models.FloatField()
+    precio = models.FloatField(null=True, default=1)
     fecha_alta = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de alta')
     fecha_actualizacion = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de actualización')
 

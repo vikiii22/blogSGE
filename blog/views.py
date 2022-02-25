@@ -53,5 +53,16 @@ def eliminar_post(request, post_id):
 
     # Existe el product y es el autor: eliminamos
     product.delete()
-    messages.success(request, F"El product {product.titulo} ha sido eliminado!")
+    messages.success(request, F"El producto {product.titulo} ha sido eliminado!")
+    return redirect("blog")
+
+
+def comprar_post(request, post_id):
+    try:
+        product = Product.objects.get(pk=post_id)  # recogemos el id del product de la url
+    except Product.DoesNotExist:  # por si se accede a una url de un product que NO existe
+        messages.error(request, "El product que quieres eliminar no existe.")
+        return redirect("blog")
+
+    messages.success(request, F"El producto {product.titulo} ha sido añadido al carrito")
     return redirect("blog")

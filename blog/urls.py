@@ -21,5 +21,6 @@ from .views import *
 urlpatterns = [
     path('', index, name="blog"), #declaracion url que nos lleva a la vista hola
     path('post/crear', crear_post, name="crear_post"),
-    path('post/eliminar<int:post_id>', eliminar_post, name="eliminar_post")
+    path('post/eliminar<int:post_id>', eliminar_post, name="eliminar_post"),
+    path('post/comprar<int:post_id>', comprar_post, name="comprar_post")
 ]
