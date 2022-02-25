@@ -19,7 +19,7 @@ def index(request):
 def crear_post(request):
     if request.method == "POST":  # comprobamos la petición
         # este formulario también recibe archivos
-        # para procesarlos se han de incluir
+        # para procesarlos se han de incluirr
         form = FormularioPost(request.POST, request.FILES)
         if form.is_valid():
             product = form.save(commit=False)  # no guardamos de manera persistente porque nos falta el usuario
