@@ -5,6 +5,7 @@
 {% block title %}Blog{% endblock %}
 
 {% block content %}
+{% if user.is_superuser %}
 <div class="container mt-3"><!-- capa con margin top de 3 -->
     <!-- Botón para ir a crear un nuevo post -->
     <div class="row mb-3"><!-- fila con margin bottom de 3 -->
@@ -14,14 +15,15 @@
         <div class="col-3 offset-9">
             <!-- enlace de tipo botón Bootstrap flotado a la derecha en la capa -->
             <a href="{% url 'crear_post' %}" class="btn btn-primary float-right">
-                Crear nuevo post
+                Añadir producto Nuevo
             </a>
         </div>
     </div>
+    {% endif %}
     <!-- POSTS -->
-    {% if posts %}<!-- Si tenemos posts -->
+    {% if products %}<!-- Si tenemos posts -->
     <!-- Recorremos los posts para mostrarlos -->
-    {% for post in posts %}
+    {% for post in products %}
     {% if forloop.first %}
     <div class="row">{% endif %}
         <div class="col-4"><!-- 3 por fila - col-3 ...4 por fila - col-6 ... 2 por fila-->
@@ -30,7 +32,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ post.titulo }}</h5>
                     <hr/>
-                    <h6 class="card-subtitle">Autor: {{ post.autor.username }}</h6>
+                    <h6 class="card-subtitle">Precio: {{ post.precio }}€</h6>
                     <p class="card-text">Categoría: {{ post.categoria.nombre }}</p>
                 </div>
                 <div class="card-footer">
@@ -38,7 +40,7 @@
                     {% if user == post.autor %}<!--usuario logado == autor post -->
                     <a href="{% url 'eliminar_post' post.id %}" class="btn btn-danger">
                         <!-- función eliminar_post (id) declarada en la vista -->
-                        Eliminar post
+                        Eliminar Producto
                     </a>
                     {% endif %}
                 </div>

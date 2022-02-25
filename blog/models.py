@@ -2,11 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 import os
 
+
 # Create your models here.
 
-#creamos una clase que extiende de models
+# creamos una clase que extiende de models
 class Categoria(models.Model):
-    #definimos el tipo y sus atributos
+    # definimos el tipo y sus atributos
     # NO tenemos clave primaria - PK, la asigna django
     # CharField (input text), TextField (textarea)...
     # atributos: long max 100, no permite nulos, campo único
@@ -15,7 +16,7 @@ class Categoria(models.Model):
 
     # str nos permite devolver la información de la clase en forma de cadena
     def __str__(self):
-        #si hacemos un print, en vez de mostrar el objeto, nos mostrará el nombre de la Categoría
+        # si hacemos un print, en vez de mostrar el objeto, nos mostrará el nombre de la Categoría
         return self.nombre
         # return "Categoría con id %d y nombre %s" % (self.id, self.nombre)
 
@@ -25,15 +26,14 @@ class Categoria(models.Model):
     # con Meta cambiamos este comportamiento
     class Meta:
         db_table = 'categories'
-        verbose_name = 'Categoría' #nombre administración
+        verbose_name = 'Categoría'  # nombre administración
         verbose_name_plural = 'Categorías'
-        ordering = ['id'] #ordenación ascendente -- [-id] ordenación descendente
+        ordering = ['id']  # ordenación ascendente -- [-id] ordenación descendente
 
 
-class Post(models.Model):
-
-    #on_delete=CASCADE si se elimina el usuario se eliminan sus posts
-    #null a True y blank a True permite valores nulos por consistencia de BBDD
+class Product(models.Model):
+    # on_delete=CASCADE si se elimina el usuario se eliminan sus posts
+    # null a True y blank a True permite valores nulos por consistencia de BBDD
     # de esta manera cuando se crea el registro de post en BBDD, como todavía no hemos asignado el usuario, vamos a guardarlo sin hacer el commit; pudiendo crear la instancia,
     # y sin establecer los cambios persistentes en BBDD vamos a poder establecer el usuario para realizar el commit con todos los cambios
     autor = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -42,9 +42,10 @@ class Post(models.Model):
     contenido = models.TextField(null=True, verbose_name='Contenido del post')
     # nos hace falta la dependencia Pillow - instalalá
     imagen = models.ImageField(upload_to='posts/%Y/%m/%d', null=True, blank=True, verbose_name='Imagen del post')
-    #fecha de alta del post para llevar el registro
+    # fecha de alta del post para llevar el registro
     # auto_now_add se define automáticamente con la fecha de inserción
     # verbose_name no se verá porque no es un campo que mostraremos en el formulario... se puede quitar
+    precio = models.FloatField()
     fecha_alta = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de alta')
     fecha_actualizacion = models.DateTimeField(auto_now_add=True, verbose_name='Fecha de actualización')
 
@@ -56,12 +57,12 @@ class Post(models.Model):
     def delete(self, *args, **kwargs):
         if os.path.isfile(self.imagen.path):  # si el archivo existe
             os.remove(self.imagen.path)  # se elimina del sistemas de archivo
-        super(Post, self).delete(*args, **kwargs)  # borrado del post llamando al constructor
+        super(Product, self).delete(*args, **kwargs)  # borrado del post llamando al constructor
 
     # podríamos sobreescribir todos los métodos disponibles - save, update...
 
     class Meta:
-        db_table = 'posts'
-        verbose_name = 'Post' #nombre administración
-        verbose_name_plural = 'Posts'
-        ordering = ['id'] #ordenación ascendente -- [-id] ordenación descendente
+        db_table = 'products'
+        verbose_name = 'Producto'
+        verbose_name_plural = 'Productos'
+        ordering = ['id']
